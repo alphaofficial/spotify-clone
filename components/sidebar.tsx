@@ -50,8 +50,8 @@ const musicMenu = [
   },
 ];
 
-//new Array creates undefined values
-//fill - fills the array with any value
+// new Array creates undefined values
+// fill - fills the array with any value
 const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
 
 const sidebar = () => {
@@ -100,7 +100,7 @@ const sidebar = () => {
           </List>
         </Box>
         <Divider color="gray.800" />
-        {/** a make the section scroll we need a fixed height */}
+        {/** to make the section scroll we need a fixed height */}
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
             {playlists.map((playlist) => (
