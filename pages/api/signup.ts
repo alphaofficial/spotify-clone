@@ -7,7 +7,7 @@ import prisma from "../../lib/prisma";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync();
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName } = req.body;
 
   let user;
   try {
@@ -15,8 +15,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         password: bcrypt.hashSync(password, salt),
         email,
-        firstName: "Albert",
-        lastName: "King",
       },
     });
   } catch (e) {
@@ -40,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       httpOnly: true,
       maxAge: 8 * 60 * 60,
       path: "/",
-      sameSite: "LAX",
+      sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
     })
   );
