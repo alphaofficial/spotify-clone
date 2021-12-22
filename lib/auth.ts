@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "./prisma";
 
 // protect API route
-export const validate = (handler) => {
+export const validateRoute = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     // check if token is valid
     const { TRAX_ACCESS_TOKEN: token } = req.cookies;
