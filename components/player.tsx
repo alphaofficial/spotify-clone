@@ -74,6 +74,31 @@ const Player = () => {
           />
         </ButtonGroup>
       </Center>
+      <Box color="gray.600">
+        <Flex justify="center" align="center">
+          <Box width="10%">
+            <Text fontSize="x-small">1:21</Text>
+          </Box>
+          <Box width="80%">
+            <RangeSlider
+              // eslint-disable-next-line jsx-a11y/aria-proptypes
+              aria-label={["min", "max"]}
+              step={0.1}
+              min={0}
+              max={300}
+              id="player-range"
+            >
+              <RangeSliderTrack bg="gray.800">
+                <RangeSliderFilledTrack bg="gray.600" />
+              </RangeSliderTrack>
+              <RangeSliderThumb index={0} />
+            </RangeSlider>
+          </Box>
+          <Box width="10%" textAlign="right">
+            <Text fontSize="x-small">3:00</Text>
+          </Box>
+        </Flex>
+      </Box>
     </Box>
   );
 };
