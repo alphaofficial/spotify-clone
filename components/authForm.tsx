@@ -34,11 +34,13 @@ const AuthForm: FC<{ mode: "signin" | "signup" }> = ({ mode }) => {
               placeholder="email"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
+              marginBottom="10px"
             />
             <Input
               placeholder="password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              marginBottom="10px"
             />
             <Button
               type="submit"

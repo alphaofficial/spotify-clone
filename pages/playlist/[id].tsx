@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import prisma from "../../lib/prisma";
 import GradientLayout from "../../components/gradientLayout";
 import { validateToken } from "../../lib/auth";
