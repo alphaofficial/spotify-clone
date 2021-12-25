@@ -1,6 +1,6 @@
 /** HTTP fetching mechanism here */
-export const fetcher = async (url: string, data = undefined) => {
-  return fetch(`${window.location.origin}/api/${url}`, {
+export const fetcher = async (url: string, data = undefined) =>
+  fetch(`${window.location.origin}/api/${url}`, {
     method: data ? "POST" : "GET",
     credentials: "include",
     headers: {
@@ -8,5 +8,11 @@ export const fetcher = async (url: string, data = undefined) => {
       Accept: "application/json",
     },
     body: JSON.stringify(data),
-  });
-};
+  })
+    .then((res) => {
+      if (res.status > 399 && res.status < 200) {
+        throw new Error(res.statusText);
+      }
+      return res.json();
+    })
+    .then((res) => res);

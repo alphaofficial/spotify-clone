@@ -4,20 +4,19 @@ import {
   ListItem,
   ListIcon,
   Divider,
-  Center,
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/layout";
 import {
   MdHome,
   MdSearch,
-  MdMusic,
   MdLibraryMusic,
   MdPlaylistAdd,
   MdFavorite,
 } from "react-icons/md";
 import NextImage from "next/image";
 import NextLink from "next/link"; // client side rendering
+import { usePlaylist } from "../lib/hooks";
 
 const navMenu = [
   {
@@ -50,11 +49,10 @@ const musicMenu = [
   },
 ];
 
-// new Array creates undefined values
-// fill - fills the array with any value
-const playlists = new Array(30).fill(1).map((_, i) => `Playlist ${i + 1}`);
+const Sidebar = () => {
+  const { playlists } = usePlaylist();
+  console.log({ playlists });
 
-const sidebar = () => {
   return (
     <Box
       width="100%"
@@ -103,11 +101,11 @@ const sidebar = () => {
         {/** to make the section scroll we need a fixed height */}
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
-            {playlists.map((playlist) => (
-              <ListItem key={playlist} paddingX="20px">
+            {playlists?.map((playlist) => (
+              <ListItem key={playlist.id} paddingX="20px">
                 <LinkBox>
                   <NextLink href="/" passHref>
-                    <LinkOverlay>{playlist}</LinkOverlay>
+                    <LinkOverlay>{playlist.name}</LinkOverlay>
                   </NextLink>
                 </LinkBox>
               </ListItem>
@@ -119,4 +117,4 @@ const sidebar = () => {
   );
 };
 
-export default sidebar;
+export default Sidebar;

@@ -7,7 +7,7 @@ import prisma from "../../lib/prisma";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const salt = bcrypt.genSaltSync();
-  const { email, password, firstName, lastName } = req.body;
+  const { email, password } = req.body;
 
   let user;
   try {
@@ -15,10 +15,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       data: {
         password: bcrypt.hashSync(password, salt),
         email,
+        firstName: "",
+        lastName: "",
       },
     });
   } catch (e) {
-    console.log({ e });
     res.status(401);
     res.json({ error: "User already exists" });
     return;
@@ -27,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // jwt requires 3 arguments: payload to sign, the secret to show it's your server sigining and the options
   const token = jwt.sign(
     { email: user.email, id: user.id, time: Date.now() },
-    process.env.JWT_SECRET,
+    "TRAX_JWT_SECRET",
     { expiresIn: "8h" }
   );
 
