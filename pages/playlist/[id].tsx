@@ -1,9 +1,33 @@
+import { Box, Text } from "@chakra-ui/layout";
 import prisma from "../../lib/prisma";
 import GradientLayout from "../../components/gradientLayout";
 import { validateToken } from "../../lib/auth";
 
+// generic bg colors
+const getBgColor = (id) => {
+  const colors = [
+    "red",
+    "green",
+    "blue",
+    "orange",
+    "purple",
+    "gray",
+    "teal",
+    "yellow",
+  ];
+
+  return colors[id - 1] || colors[Math.floor(Math.random() * colors.length)];
+};
+
 const Playlist = ({ playlist }) => {
-  return <div>{playlist.name}</div>;
+  const color = getBgColor(playlist.id);
+  return (
+    <GradientLayout color={color}>
+      <Box>
+        <Text>Test</Text>
+      </Box>
+    </GradientLayout>
+  );
 };
 
 export const getServerSideProps = async ({ query, req }) => {
