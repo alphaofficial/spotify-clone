@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/layout";
 import prisma from "../../lib/prisma";
 import GradientLayout from "../../components/gradientLayout";
 import { validateToken } from "../../lib/auth";
+import SongsTable from "../../components/songsTable";
 
 // generic bg colors
 const getBgColor = (id) => {
@@ -31,7 +32,7 @@ const Playlist = ({ playlist }) => {
       image={`https://picsum.photos/400?random=${playlist.id}`}
     >
       <Box>
-        <Text>Test</Text>
+        <SongsTable songs={playlist.songs} />
       </Box>
     </GradientLayout>
   );
