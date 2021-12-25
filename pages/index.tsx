@@ -1,6 +1,7 @@
 import GradientLayout from "../components/gradientLayout";
+import prisma from "../lib/prisma";
 
-const Home = () => {
+const Home = ({ artists }) => {
   return (
     <GradientLayout
       color="green"
