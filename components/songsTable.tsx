@@ -1,10 +1,19 @@
 import { Box } from "@chakra-ui/layout";
 import { Table, Thead, Td, Tr, Tbody, Th, IconButton } from "@chakra-ui/react";
+import { useStoreActions } from "easy-peasy";
 import { BsPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { formatDate, formatTime } from "../lib/formatters";
+import { Song } from "@prisma/client";
 
 const SongsTable = ({ songs }) => {
+  const playSongs = useStoreActions((store) => store.changeActiveSongs);
+  const setActiveSong = useStoreActions((store) => store.changeActiveSong);
+
+  const handlePlay = (activeSong?) => {
+    setActiveSong(activeSong || songs[0]);
+    playSongs(songs);
+  };
   return (
     <Box bg="transparent">
       <Box padding="10px" marginBottom="20px">
@@ -15,6 +24,7 @@ const SongsTable = ({ songs }) => {
             colorScheme="green"
             size="lg"
             isRound
+            onClick={() => handlePlay()}
           />
         </Box>
         <Table variant="unstyled">
@@ -29,7 +39,7 @@ const SongsTable = ({ songs }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {songs.map((song, index) => (
+            {songs.map((song: Song, index: number) => (
               <Tr
                 sx={{
                   transition: "all 0.3s",
@@ -39,6 +49,7 @@ const SongsTable = ({ songs }) => {
                 }}
                 key={song.id}
                 cursor="pointer"
+                onClick={() => handlePlay(song)}
               >
                 <Td>{index + 1}</Td>
                 <Td>{song.name}</Td>
