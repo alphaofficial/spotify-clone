@@ -21,6 +21,7 @@ import {
   MdOutlineRepeat,
 } from "react-icons/md";
 import { useStoreActions } from "easy-peasy";
+import { formatTime } from "../lib/formatters";
 
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(false);
@@ -31,6 +32,22 @@ const Player = ({ songs, activeSong }) => {
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
   const soundRef = useRef(null);
+
+  useEffect(() => {
+    let timerId;
+
+    if (playing && !isSeeking) {
+      const f = () => {
+        setSeek(soundRef.current.seek());
+        timerId = requestAnimationFrame(f);
+      };
+
+      timerId = requestAnimationFrame(f);
+
+      return () => cancelAnimationFrame(timerId);
+    }
+    cancelAnimationFrame(timerId);
+  }, [playing, isSeeking]);
 
   const setPlayState = (value: boolean) => {
     setPlaying(value);
@@ -57,8 +74,7 @@ const Player = ({ songs, activeSong }) => {
         const next = Math.floor(Math.random() * songs.length);
         if (next === state) {
           // repeat
-          nextSong();
-          return;
+          return nextSong();
         }
         return next;
       }
@@ -162,7 +178,7 @@ const Player = ({ songs, activeSong }) => {
       <Box color="gray.600">
         <Flex justify="center" align="center">
           <Box width="10%">
-            <Text fontSize="x-small">1:21</Text>
+            <Text fontSize="x-small">{formatTime(seek)}</Text>
           </Box>
           <Box width="80%">
             <RangeSlider
@@ -184,7 +200,7 @@ const Player = ({ songs, activeSong }) => {
             </RangeSlider>
           </Box>
           <Box width="10%" textAlign="right">
-            <Text fontSize="x-small">3:00</Text>
+            <Text fontSize="x-small">{formatTime(duration)}</Text>
           </Box>
         </Flex>
       </Box>

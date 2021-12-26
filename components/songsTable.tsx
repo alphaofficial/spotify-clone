@@ -1,13 +1,15 @@
+import { Song } from "@prisma/client";
 import { Box } from "@chakra-ui/layout";
 import { Table, Thead, Td, Tr, Tbody, Th, IconButton } from "@chakra-ui/react";
 import { useStoreActions } from "easy-peasy";
 import { BsPlayFill } from "react-icons/bs";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { formatDate, formatTime } from "../lib/formatters";
-import { Song } from "@prisma/client";
 
 const SongsTable = ({ songs }) => {
+  // @ts-ignore
   const playSongs = useStoreActions((store) => store.changeActiveSongs);
+  // @ts-ignore
   const setActiveSong = useStoreActions((store) => store.changeActiveSong);
 
   const handlePlay = (activeSong?) => {

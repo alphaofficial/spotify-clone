@@ -100,21 +100,23 @@ const Sidebar = () => {
         {/** to make the section scroll we need a fixed height */}
         <Box height="66%" overflowY="auto" paddingY="20px">
           <List spacing={2}>
-            {playlists?.map((playlist) => (
-              <ListItem key={playlist.id} paddingX="20px">
-                <LinkBox>
-                  <NextLink
-                    href={{
-                      pathname: "/playlist/[id]",
-                      query: { id: playlist.id },
-                    }}
-                    passHref
-                  >
-                    <LinkOverlay>{playlist.name}</LinkOverlay>
-                  </NextLink>
-                </LinkBox>
-              </ListItem>
-            ))}
+            {playlists?.length
+              ? playlists?.map((playlist) => (
+                  <ListItem key={playlist.id} paddingX="20px">
+                    <LinkBox>
+                      <NextLink
+                        href={{
+                          pathname: "/playlist/[id]",
+                          query: { id: playlist.id },
+                        }}
+                        passHref
+                      >
+                        <LinkOverlay>{playlist.name}</LinkOverlay>
+                      </NextLink>
+                    </LinkBox>
+                  </ListItem>
+                ))
+              : null}
           </List>
         </Box>
       </Box>
