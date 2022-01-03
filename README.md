@@ -58,7 +58,7 @@ Start the projects development server
 yarn dev
 ```
 
-The project should now be available at http://localhost:4800
+The project should now be available at http://localhost:4000
 
 ## Technologies used
 
