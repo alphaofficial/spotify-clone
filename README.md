@@ -2,6 +2,19 @@
 
 A fullstack clone of [spotify web player](https://open.spotify.com/)
 
+## Live preview
+
+The app is deployed on vercel at [https://spotify-clone-seven-pi.vercel.app](https://spotify-clone-seven-pi.vercel.app/signin)
+
+## Credentials
+
+To login use the following test credentials:
+
+```
+email: user@test.com
+password: password
+```
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
