@@ -2,18 +2,20 @@ import {
   Box,
   List,
   ListItem,
-  ListIcon,
   Divider,
   LinkBox,
   LinkOverlay,
+  Flex,
+  Text,
 } from "@chakra-ui/layout";
 import {
-  MdHome,
   MdSearch,
   MdLibraryMusic,
   MdPlaylistAdd,
   MdFavorite,
 } from "react-icons/md";
+import { HiOutlineHome } from "react-icons/hi";
+import { BiPodcast } from "react-icons/bi";
 import NextImage from "next/image";
 import NextLink from "next/link"; // client side rendering
 import { usePlaylist } from "../lib/hooks";
@@ -21,30 +23,47 @@ import { usePlaylist } from "../lib/hooks";
 const navMenu = [
   {
     name: "Home",
-    icon: MdHome,
-    route: "/",
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <HiOutlineHome color={color} size={size} />
+    ),
+    route: "/home",
   },
   {
     name: "Search",
-    icon: MdSearch,
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <MdSearch color={color} size={size} />
+    ),
     route: "/",
   },
   {
     name: "Your Library",
-    icon: MdLibraryMusic,
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <MdLibraryMusic color={color} size={size} />
+    ),
     route: "/",
   },
 ];
 
 const musicMenu = [
   {
-    name: "Create",
-    icon: MdPlaylistAdd,
+    name: "Create Playlist",
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <MdPlaylistAdd color={color} size={size} />
+    ),
     route: "/",
   },
   {
-    name: "Favorite",
-    icon: MdFavorite,
+    name: "Liked Songs",
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <MdFavorite color={color} size={size} />
+    ),
+    route: "/",
+  },
+  {
+    name: "Your Episodes",
+    icon: ({ color, size }: { color: string; size: number }) => (
+      <BiPodcast color={color} size={size} />
+    ),
     route: "/",
   },
 ];
@@ -70,9 +89,13 @@ const Sidebar = () => {
               <ListItem key={name} paddingX="20px" fontSize="16px">
                 <LinkBox>
                   <NextLink href={route} passHref>
-                    <LinkOverlay>
-                      <ListIcon as={icon} color="white" marginRight="20px" />
-                      {name}
+                    <LinkOverlay fontWeight="bold">
+                      <Flex alignItems="center">
+                        {icon({ color: "white", size: 28 })}
+                        <Box marginLeft="15px">
+                          <Text>{name}</Text>
+                        </Box>
+                      </Flex>
                     </LinkOverlay>
                   </NextLink>
                 </LinkBox>
@@ -86,9 +109,13 @@ const Sidebar = () => {
               <ListItem key={name} paddingX="20px" fontSize="16px">
                 <LinkBox>
                   <NextLink href={route} passHref>
-                    <LinkOverlay>
-                      <ListIcon as={icon} color="white" marginRight="20px" />
-                      {name}
+                    <LinkOverlay fontWeight="bold">
+                      <Flex alignItems="center">
+                        {icon({ color: "white", size: 24 })}
+                        <Box marginLeft="15px">
+                          <Text>{name}</Text>
+                        </Box>
+                      </Flex>
                     </LinkOverlay>
                   </NextLink>
                 </LinkBox>
